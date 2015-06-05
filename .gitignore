@@ -1,0 +1,7 @@
+Debug/
+/proj/build/
+*.sdf
+*.suo
+*.opensdf
+*.aps
+*.user

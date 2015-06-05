@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+	<TargetName Name="OgreMain"/>
+	<ProjectPath Path="F:\Ogre2.0\Build\OgreMain"/>
+	<ProjectBuildPath Path="F:\3rd\OgreMain2.0\proj"/>
+	<IncludePath Path="F:\Ogre2.0\OgreMain\include"/>
+	<IncludeCopyTo Path="F:\3rd\OgreMain2.0\include\OgreMain\"/>
+	<SrcPath Path="F:\Ogre2.0\OgreMain\src"/>
+	<SrcCopyTo Path="F:\3rd\OgreMain2.0\src"/>
+	<AdditionalIncludeDirectories>
+		<Item Path="$(SolutionDir)../externals/zlib/include/zlib"/>
+		<Item Path="$(SolutionDir)../externals/zzip/include"/>
+		<Item Path="$(SolutionDir)../externals/FreeImage/include/FreeImage"/>
+		<Item Path="$(SolutionDir)../externals/freetype/include"/>
+		<Item Path="$(SolutionDir)../externals/freetype/include/freetype"/>
+		<Item Path="$(SolutionDir)../externals/OIS/include/OIS"/>
+		<Item Path="$(ProjectDir)../include/OgreMain/"/>
+		<Item Path="$(ProjectDir)../include/OgreMain/WIN32"/>
+		<Item Path="$(ProjectDir)../src/"/>
+		<Item Path="$(ProjectDir)../src/nedmalloc"/>
+	</AdditionalIncludeDirectories>
+	<AdditionalDependencies>
+		<Item Path="$(SolutionDir)../externals/FreeImage/lib/$(Configuration)/$(Configuration)/$(Platform)/$(PlatformToolset)/FreeImageLib.lib"/>
+		<Item Path="$(SolutionDir)../externals/zzip/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/zziplib.lib"/>
+		<Item Path="$(SolutionDir)../externals/zlib/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/zlib.lib"/>
+	</AdditionalDependencies>
+	<AdditionalLibraryDirectories>
+		<Item Path=""/>
+	</AdditionalLibraryDirectories>
+</Project>
