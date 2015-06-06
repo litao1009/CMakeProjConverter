@@ -375,7 +375,7 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 					{
 						tmpIDG.add(curIDGItem.first + "." + curID.first, R"($(SolutionDir)build\lib\$(ProjectName)\$(Configuration)\$(Platform)\$(PlatformToolset)\$(TargetName).lib)");
 					}
-					else
+					else if ( curID.first != "AssemblerListingLocation" )
 					{
 						tmpIDG.add_child(curIDGItem.first + "." + curID.first, curID.second);
 					}
