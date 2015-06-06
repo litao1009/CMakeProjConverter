@@ -224,7 +224,12 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 	auto relProjToSrcPath = RelativeTo(projInfo.ProjectBuildPath, projInfo.SrcCopyTo);
 
 	{//Copy
-		bfs::create_directories(projInfo.IncludeCopyTo);		
+		if ( bfs::exists(projInfo.IncludeCopyTo) )
+		{
+			bfs::remove_all(projInfo.IncludeCopyTo);
+		}
+		bfs::create_directories(projInfo.IncludeCopyTo);
+		
 		bfs::recursive_directory_iterator itor(projInfo.IncludePath), itorEnd;
 		for ( auto& curFile : boost::make_iterator_range( itor, itorEnd) )
 		{
@@ -241,6 +246,10 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 		}
 	}
 	{
+		if ( bfs::exists(projInfo.SrcCopyTo) )
+		{
+			bfs::remove_all(projInfo.SrcCopyTo);
+		}
 		bfs::create_directories(projInfo.SrcCopyTo);
 		bfs::recursive_directory_iterator itor(projInfo.SrcPath), itorEnd;
 		for ( auto& curFile : boost::make_iterator_range(itor, itorEnd) )
@@ -396,16 +405,24 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 					auto hFile = curItemGroup.second.get<std::string>("<xmlattr>.Include");
 
 					auto filePath = bfs::system_complete(projInfo.ProjectPath / hFile);
-					auto relPath = RelativeTo(projInfo.IncludePath, filePath);
-					auto finalPath = relProjToIncludePath / relPath;
-					
-					if ( bfs::exists(projInfo.ProjectBuildPath / finalPath) )
+					auto includeRelPath = RelativeTo(projInfo.IncludePath, filePath);
+					auto includePath = relProjToIncludePath / includeRelPath;
+					auto srcRelPath = RelativeTo(projInfo.SrcPath, filePath);
+					auto srcPath = relProjToSrcPath / includeRelPath;
+
+					if ( bfs::exists(projInfo.ProjectBuildPath / includePath) )
 					{
-						tmpFile.add("<xmlattr>.Include", (relProjToIncludePath / relPath).string());
+						tmpFile.add("<xmlattr>.Include", (relProjToIncludePath / includeRelPath).string());
+					}
+					else if ( bfs::exists(projInfo.ProjectBuildPath / srcPath) )
+					{
+						tmpFile.add("<xmlattr>.Include", (relProjToSrcPath / srcRelPath).string());
 					}
 					else
 					{
-						tmpFile.add("<xmlattr>.Include", relPath.string());
+						auto curRel = RelativeTo(projInfo.ProjectBuildPath, projInfo.IncludeCopyTo);
+						bfs::copy_file(filePath, projInfo.IncludeCopyTo / filePath.filename(), bfs::copy_option::overwrite_if_exists);
+						tmpFile.add("<xmlattr>.Include", (curRel / filePath.filename()).string());
 					}
 					
 
