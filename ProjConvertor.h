@@ -20,10 +20,10 @@ public:
 	std::string	TargetName;
 	bfs::path	ProjectPath;
 	bfs::path	ProjectBuildPath;
-	bfs::path	IncludePath;
-	bfs::path	IncludeCopyTo;
-	bfs::path	SrcPath;
-	bfs::path	SrcCopyTo;
+	bfs::path	IncludeBuildPath;
+	bfs::path	IncludeRootPath;
+	bfs::path	SrcBuildPath;
+	bfs::path	SrcRootPath;
 	Vector		AdditionalIncludeDirectories;
 	Vector		AdditionalDependencies;
 	Vector		AdditionalLibraryDirectories;

@@ -54,37 +54,37 @@ boost::optional<SProjectInfo> ReadConfig()
 	}
 	projInfo.ProjectBuildPath = bfs::system_complete(*projBuildPath);
 
-	auto includePath = configXml.get_optional<std::string>("Project.IncludePath.<xmlattr>.Path");
-	if ( !includePath )
+	auto includeBuildPath = configXml.get_optional<std::string>("Project.IncludeBuildPath.<xmlattr>.Path");
+	if ( !includeBuildPath )
 	{
-		std::cerr << "Need Include Path." << std::endl;
+		std::cerr << "Need Include Build Path." << std::endl;
 		return boost::none;
 	}
-	projInfo.IncludePath = bfs::system_complete(*includePath);
+	projInfo.IncludeBuildPath = bfs::system_complete(*includeBuildPath);
 
-	auto includeCopyToPath = configXml.get_optional<std::string>("Project.IncludeCopyTo.<xmlattr>.Path");
-	if ( !includeCopyToPath )
+	auto includeRootPath = configXml.get_optional<std::string>("Project.IncludeRootPath.<xmlattr>.Path");
+	if ( !includeRootPath )
 	{
-		std::cerr << "Need Include Copy To Path." << std::endl;
+		std::cerr << "Need Include Root Path." << std::endl;
 		return boost::none;
 	}
-	projInfo.IncludeCopyTo = bfs::system_complete(*includeCopyToPath);
+	projInfo.IncludeRootPath = bfs::system_complete(*includeRootPath);
 
-	auto srcPath = configXml.get_optional<std::string>("Project.SrcPath.<xmlattr>.Path");
-	if ( !srcPath )
+	auto srcBuildPath = configXml.get_optional<std::string>("Project.SrcBuildPath.<xmlattr>.Path");
+	if ( !srcBuildPath )
 	{
-		std::cerr << "Need Src Path." << std::endl;
+		std::cerr << "Need Src Build Path." << std::endl;
 		return boost::none;
 	}
-	projInfo.SrcPath = bfs::system_complete(*srcPath);
+	projInfo.SrcBuildPath = bfs::system_complete(*srcBuildPath);
 
-	auto srcCopyToPath = configXml.get_optional<std::string>("Project.SrcCopyTo.<xmlattr>.Path");
-	if ( !srcCopyToPath )
+	auto srcRootPath = configXml.get_optional<std::string>("Project.SrcRootPath.<xmlattr>.Path");
+	if ( !srcRootPath )
 	{
-		std::cerr << "Need Src Copy To Path." << std::endl;
+		std::cerr << "Need Src Build Path." << std::endl;
 		return boost::none;
 	}
-	projInfo.SrcCopyTo = bfs::system_complete(*srcCopyToPath);
+	projInfo.SrcRootPath = bfs::system_complete(*srcRootPath);
 
 	auto additionalIncDirs = configXml.get_child_optional("Project.AdditionalIncludeDirectories");
 	if ( additionalIncDirs )
@@ -144,18 +144,6 @@ bool CheckConfig(const SProjectInfo& projInfo)
 		return false;
 	}
 
-	if ( !bfs::exists(projInfo.IncludePath) )
-	{
-		std::cerr << "Can not Find " << bfs::absolute(projInfo.IncludePath) << std::endl;
-		return false;
-	}
-
-	if ( !bfs::exists(projInfo.SrcPath) )
-	{
-		std::cerr << "Can not Find " << bfs::absolute(projInfo.SrcPath) << std::endl;
-		return false;
-	}
-
 	return true;
 }
 
@@ -177,7 +165,11 @@ bfs::path RelativeTo(bfs::path from, bfs::path to)
 	bfs::path finalPath;
 	while ( fromIter != from.end() )
 	{
-		finalPath /= "..";
+		if ( !(finalPath.empty() && *fromIter == ".") )
+		{
+			finalPath /= "..";
+		}
+		
 		++fromIter;
 	}
 
@@ -219,58 +211,29 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 		return false;
 	}
 
-	auto relProjToIncludePath = RelativeTo(projInfo.ProjectBuildPath, projInfo.IncludeCopyTo);
-	auto relProjToSrcPath = RelativeTo(projInfo.ProjectBuildPath, projInfo.SrcCopyTo);
+	auto relProjToIncludePath = RelativeTo(projInfo.ProjectBuildPath, projInfo.IncludeBuildPath);
+	auto relProjToSrcPath = RelativeTo(projInfo.ProjectBuildPath, projInfo.SrcBuildPath);
 
-	{//Copy
-		if ( bfs::exists(projInfo.IncludeCopyTo) )
+	{
+		if ( bfs::exists(projInfo.IncludeBuildPath) )
 		{
-			bfs::remove_all(projInfo.IncludeCopyTo);
+			bfs::remove_all(projInfo.IncludeBuildPath);
 		}
-		bfs::create_directories(projInfo.IncludeCopyTo);
-		
-		bfs::recursive_directory_iterator itor(projInfo.IncludePath), itorEnd;
-		for ( auto& curFile : boost::make_iterator_range( itor, itorEnd) )
-		{
-			auto relPath = RelativeTo(projInfo.IncludePath, curFile);
 
-			if ( bfs::is_directory(curFile) )
-			{
-				bfs::create_directories(projInfo.IncludeCopyTo / relPath);
-			}
-			else
-			{
-				bfs::copy_file(curFile, projInfo.IncludeCopyTo / relPath, bfs::copy_option::overwrite_if_exists);
-			}
-		}
+		bfs::create_directories(projInfo.IncludeBuildPath);
 	}
 	{
-		if ( bfs::exists(projInfo.SrcCopyTo) )
+		if ( bfs::exists(projInfo.SrcBuildPath) )
 		{
-			bfs::remove_all(projInfo.SrcCopyTo);
+			bfs::remove_all(projInfo.SrcBuildPath);
 		}
 		try
 		{
-			bfs::create_directories(projInfo.SrcCopyTo);
+			bfs::create_directories(projInfo.SrcBuildPath);
 		}
 		catch(std::exception& exp)
 		{
 			auto s = exp.what();
-		}
-		
-		bfs::recursive_directory_iterator itor(projInfo.SrcPath), itorEnd;
-		for ( auto& curFile : boost::make_iterator_range(itor, itorEnd) )
-		{
-			auto relPath = RelativeTo(projInfo.SrcPath, curFile);
-
-			if ( bfs::is_directory(curFile) )
-			{
-				bfs::create_directories(projInfo.SrcCopyTo / relPath);
-			}
-			else
-			{
-				bfs::copy_file(curFile, projInfo.SrcCopyTo / relPath, bfs::copy_option::overwrite_if_exists);
-			}
 		}
 	}
 
@@ -415,26 +378,30 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 						filePath = bfs::system_complete(projInfo.ProjectPath / hFile);
 					}
 					
-					auto includeRelPath = RelativeTo(projInfo.IncludePath, filePath);
-					auto includePath = relProjToIncludePath / includeRelPath;
-					auto srcRelPath = RelativeTo(projInfo.SrcPath, filePath);
-					auto srcPath = relProjToSrcPath / srcRelPath;
-
-					if ( bfs::exists(projInfo.ProjectBuildPath / includePath) )
+					auto includeRelPath = RelativeTo(projInfo.IncludeRootPath, filePath);
+					if ( *includeRelPath.begin() != ".." )
 					{
-						tmpFile.add("<xmlattr>.Include", (relProjToIncludePath / includeRelPath).string());
-					}
-					else if ( bfs::exists(projInfo.ProjectBuildPath / srcPath) )
-					{
-						tmpFile.add("<xmlattr>.Include", (relProjToSrcPath / srcRelPath).string());
+						auto writePath = (relProjToIncludePath / includeRelPath);
+						tmpFile.add("<xmlattr>.Include", writePath.string());
+						bfs::copy_file(filePath, projInfo.ProjectBuildPath / writePath);
 					}
 					else
 					{
-						auto curRel = RelativeTo(projInfo.ProjectBuildPath, projInfo.IncludeCopyTo);
-						bfs::copy_file(filePath, projInfo.IncludeCopyTo / filePath.filename(), bfs::copy_option::overwrite_if_exists);
-						tmpFile.add("<xmlattr>.Include", (curRel / filePath.filename()).string());
-					}
-					
+						auto srcRelPath = RelativeTo(projInfo.SrcRootPath, filePath);
+						if ( *srcRelPath.begin() != ".." )
+						{
+							auto writePath = (relProjToIncludePath / includeRelPath);
+							tmpFile.add("<xmlattr>.Include", writePath.string());
+							bfs::copy_file(filePath, projInfo.ProjectBuildPath / writePath);
+						}
+						else
+						{
+							bfs::create_directories(projInfo.ProjectBuildPath / relProjToIncludePath / "Other");
+							auto writePath = (relProjToIncludePath / "Other" / filePath.filename());
+							tmpFile.add("<xmlattr>.Include", writePath.string());
+							bfs::copy_file(filePath, projInfo.ProjectBuildPath / writePath);
+						}
+					}					
 
 					tmpIG.add_child(curItemGroup.first, tmpFile);
 				}
@@ -449,14 +416,24 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 							auto cppFile = curItemGroup.second.get<std::string>("<xmlattr>.Include");
 
 							bfs::path filePath = cppFile;
-							if ( !filePath.is_absolute() )
+							if ( *filePath.begin() != ".." )
 							{
 								filePath = bfs::system_complete(projInfo.ProjectPath / cppFile);
 							}
-							auto relPath = RelativeTo(projInfo.SrcPath, filePath);
-
-
-							tmpFile.add("<xmlattr>.Include", (relProjToSrcPath / relPath).string());
+							auto relPath = RelativeTo(projInfo.SrcRootPath, filePath);
+							if ( *relPath.begin() != ".." )
+							{
+								auto writePath = (relProjToSrcPath / relPath);
+								tmpFile.add("<xmlattr>.Include", (relProjToSrcPath / relPath).string());
+								bfs::copy_file(filePath, projInfo.ProjectBuildPath / writePath);
+							}
+							else
+							{
+								bfs::create_directories(projInfo.ProjectBuildPath / relProjToSrcPath / "Other");
+								auto writePath = (relProjToSrcPath / "Other" / filePath.filename());
+								tmpFile.add("<xmlattr>.Include", writePath.string());
+								bfs::copy_file(filePath, projInfo.ProjectBuildPath / writePath);
+							}
 						}
 						else
 						{
@@ -518,8 +495,8 @@ bool	BuildFilter(const SProjectInfo& projInfo)
 		return false;
 	}
 
-	auto relProjToIncludePath = RelativeTo(projInfo.ProjectBuildPath, projInfo.IncludeCopyTo);
-	auto relProjToSrcPath = RelativeTo(projInfo.ProjectBuildPath, projInfo.SrcCopyTo);
+	auto relProjToIncludePath = RelativeTo(projInfo.ProjectBuildPath, projInfo.IncludeBuildPath);
+	auto relProjToSrcPath = RelativeTo(projInfo.ProjectBuildPath, projInfo.SrcBuildPath);
 
 	for ( auto& curProjItem : *projItems )
 	{
@@ -544,9 +521,9 @@ bool	BuildFilter(const SProjectInfo& projInfo)
 							bfs::path file = curItemProperty.second.get<std::string>("Include");
 
 							auto filePath = file.is_absolute() ? file : bfs::system_complete(projInfo.ProjectPath / file);
-							auto includeRelPath = RelativeTo(projInfo.IncludePath, filePath);
+							auto includeRelPath = RelativeTo(projInfo.IncludeRootPath, filePath);
 							auto includePath = relProjToIncludePath / includeRelPath;
-							auto srcRelPath = RelativeTo(projInfo.SrcPath, filePath);
+							auto srcRelPath = RelativeTo(projInfo.SrcRootPath, filePath);
 							auto srcPath = relProjToSrcPath / srcRelPath;
 
 							if ( bfs::exists(projInfo.ProjectBuildPath / includePath) )
@@ -557,7 +534,7 @@ bool	BuildFilter(const SProjectInfo& projInfo)
 							{
 								item.add("<xmlattr>.Include", (relProjToSrcPath / srcRelPath).string());
 							}
-							else if ( bfs::exists(projInfo.IncludeCopyTo/filePath.filename()))
+							else if ( bfs::exists(projInfo.IncludeBuildPath/filePath.filename()))
 							{
 								item.add("<xmlattr>.Include", (relProjToIncludePath / filePath.filename()).string());
 							}
