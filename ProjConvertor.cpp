@@ -249,7 +249,15 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 		{
 			bfs::remove_all(projInfo.SrcCopyTo);
 		}
-		bfs::create_directories(projInfo.SrcCopyTo);
+		try
+		{
+			bfs::create_directories(projInfo.SrcCopyTo);
+		}
+		catch(std::exception& exp)
+		{
+			auto s = exp.what();
+		}
+		
 		bfs::recursive_directory_iterator itor(projInfo.SrcPath), itorEnd;
 		for ( auto& curFile : boost::make_iterator_range(itor, itorEnd) )
 		{
@@ -375,7 +383,7 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 					{
 						tmpIDG.add(curIDGItem.first + "." + curID.first, R"($(SolutionDir)build\lib\$(ProjectName)\$(Configuration)\$(Platform)\$(PlatformToolset)\$(TargetName).lib)");
 					}
-					else if ( curID.first != "AssemblerListingLocation" )
+					else if ( curID.first != "AssemblerListingLocation" && curID.first != "ProgramDataBaseFile" )
 					{
 						tmpIDG.add_child(curIDGItem.first + "." + curID.first, curID.second);
 					}
@@ -401,7 +409,12 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 
 					auto hFile = curItemGroup.second.get<std::string>("<xmlattr>.Include");
 
-					auto filePath = bfs::system_complete(projInfo.ProjectPath / hFile);
+					bfs::path filePath = hFile;
+					if ( !bfs::path(hFile).is_absolute() )
+					{
+						filePath = bfs::system_complete(projInfo.ProjectPath / hFile);
+					}
+					
 					auto includeRelPath = RelativeTo(projInfo.IncludePath, filePath);
 					auto includePath = relProjToIncludePath / includeRelPath;
 					auto srcRelPath = RelativeTo(projInfo.SrcPath, filePath);
@@ -435,7 +448,11 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 						{
 							auto cppFile = curItemGroup.second.get<std::string>("<xmlattr>.Include");
 
-							auto filePath = bfs::system_complete(projInfo.ProjectPath / cppFile);
+							bfs::path filePath = cppFile;
+							if ( !filePath.is_absolute() )
+							{
+								filePath = bfs::system_complete(projInfo.ProjectPath / cppFile);
+							}
 							auto relPath = RelativeTo(projInfo.SrcPath, filePath);
 
 
@@ -526,7 +543,7 @@ bool	BuildFilter(const SProjectInfo& projInfo)
 						{
 							bfs::path file = curItemProperty.second.get<std::string>("Include");
 
-							auto filePath = bfs::system_complete(projInfo.ProjectPath / file);
+							auto filePath = file.is_absolute() ? file : bfs::system_complete(projInfo.ProjectPath / file);
 							auto includeRelPath = RelativeTo(projInfo.IncludePath, filePath);
 							auto includePath = relProjToIncludePath / includeRelPath;
 							auto srcRelPath = RelativeTo(projInfo.SrcPath, filePath);

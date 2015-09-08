@@ -1,36 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-	<TargetName Name="OgreMain"/>
-	<ProjectPath Path="F:\Ogre2.0\Build\OgreMain"/>
-	<ProjectBuildPath Path="F:\3rd\OgreMain2.0\proj"/>
-	<IncludePath Path="F:\Ogre2.0\OgreMain\include"/>
-	<IncludeCopyTo Path="F:\3rd\OgreMain2.0\include\OgreMain\"/>
-	<SrcPath Path="F:\Ogre2.0\OgreMain\src"/>
-	<SrcCopyTo Path="F:\3rd\OgreMain2.0\src"/>
+	<TargetName Name="AssImp"/>
+	<ProjectPath Path="F:\assimp\Build\code"/>
+	<ProjectBuildPath Path="F:\3rd\assimp\proj"/>
+	<IncludePath Path="F:\assimp\include"/>
+	<IncludeCopyTo Path="F:\3rd\assimp\include"/>
+	<SrcPath Path="F:\assimp\code"/>
+	<SrcCopyTo Path="F:\3rd\assimp\src"/>
 	<AdditionalIncludeDirectories>
-		<Item Path="$(SolutionDir)../externals/zlib/include/zlib"/>
-		<Item Path="$(SolutionDir)../externals/zzip/include"/>
-		<Item Path="$(SolutionDir)../externals/FreeImage/include/FreeImage"/>
-		<Item Path="$(SolutionDir)../externals/freetype/include"/>
-		<Item Path="$(SolutionDir)../externals/freetype/include/freetype"/>
-		<Item Path="$(SolutionDir)../externals/OIS/include/OIS"/>
-		<Item Path="$(ProjectDir)../include/OgreMain/"/>
-		<Item Path="$(ProjectDir)../include/OgreMain/WIN32"/>
+		<Item Path="$(ProjectDir)../include/"/>
 		<Item Path="$(ProjectDir)../src/"/>
-		<Item Path="$(ProjectDir)../src/nedmalloc"/>
 	</AdditionalIncludeDirectories>
 	<AdditionalDependencies>
-		<Item Path="$(SolutionDir)../externals/FreeImage/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/FreeImageLib.lib"/>
-		<Item Path="$(SolutionDir)../externals/zzip/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/zziplib.lib"/>
-		<Item Path="$(SolutionDir)../externals/zlib/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/zlib.lib"/>
-		<Item Path="$(SolutionDir)../externals/LibJPEG/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/LibJPEG.lib"/>
-		<Item Path="$(SolutionDir)../externals/LibJXR/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/LibJXR.lib"/>
-		<Item Path="$(SolutionDir)../externals/LibPNG/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/LibPNG.lib"/>
-		<Item Path="$(SolutionDir)../externals/LibRawLite/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/LibRaw.lib"/>
-		<Item Path="$(SolutionDir)../externals/LibTIFF4/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/LibTIFF4.lib"/>
-		<Item Path="$(SolutionDir)../externals/LibWebP/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/LibWebP.lib"/>
-		<Item Path="$(SolutionDir)../externals/OpenEXR/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/OpenEXR.lib"/>
-		<Item Path="$(SolutionDir)../externals/OpenJPEG/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/LibOpenJPEG.lib"/>
+		
 	</AdditionalDependencies>
 	<AdditionalLibraryDirectories>
 		<Item Path=""/>
