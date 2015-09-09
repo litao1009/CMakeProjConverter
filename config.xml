@@ -1,15 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-	<TargetName Name="FreeCADBase"/>
-	<ProjectBuildPath Path="F:\3rd\FreeCAD\FreeCADBase\"/>
-	<VCXProjectPath From="F:\FreeCAD_sf_master\Build\src\Base\" To="$(ProjectBuildPath)proj\"/>
+	<!--TargetName-->
+	<TargetName Name="FreeCADBase" />
+	<!--ProjectBuildPath-->
+	<ProjectBuildPath Path="F:\3rd\FreeCAD\FreeCADBase\" />
+	<!--VCXProjectPath-->
+	<VCXProjectPath From="F:\FreeCAD_sf_master\Build\src\Base\" To="$(ProjectBuildPath)proj\" />
+	<!--SrcDirectories-->
 	<SrcDirectories>
-		<Item From="F:\FreeCAD_sf_master\src\Base\" To="$(ProjectBuildPath)Base\" AddToIncludeDir="True"/>
-		<Item From="F:\FreeCAD_sf_master\src\zipios++\" To="$(ProjectBuildPath)zipios++\" AddToIncludeDir="True"/>
-		<Item From="F:\FreeCAD_sf_master\src\CXX\" To="$(ProjectBuildPath)CXX\" AddToIncludeDir="True"/>
+		<Item From="F:\FreeCAD_sf_master\src\Base\" To="$(ProjectBuildPath)Base\" AddToIncludeDir="True" />
+		<Item From="F:\FreeCAD_sf_master\src\zipios++\" To="$(ProjectBuildPath)zipios++\" AddToIncludeDir="True" />
+		<Item From="F:\FreeCAD_sf_master\src\CXX\" To="$(ProjectBuildPath)CXX\" AddToIncludeDir="True" />
 	</SrcDirectories>
-	<AdditionalDependencies>
-	</AdditionalDependencies>
-	<AdditionalLibraryDirectories>
-	</AdditionalLibraryDirectories>
+	<!--IgnoreCustomBuild-->
+	<IgnoreCustomBuild>
+		<Item Name="F:\FreeCAD_sf_master\src\Base\Debugger.h" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\FutureWatcherProgress.h" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\AxisPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\BaseClassPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\BoundBoxPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\MatrixPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\PersistencePy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\PlacementPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\RotationPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\VectorPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\QuantityPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\UnitPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\CMakeLists.txt" />
+	</IgnoreCustomBuild>
+	<IgnoreInclude>
+	</IgnoreInclude>
+	<IgnoreCompile>
+	</IgnoreCompile>
+	<!--AdditionalCopyFiles-->
+	<AdditionalCopyFiles>
+		<File From="F:\FreeCAD_sf_master\src\FCConfig.h" To="$(ProjectBuildPath)..\"/>
+		<Folder From="F:\FreeCAD_sf_master\FreeCADLibs_11.1_x86_VC12\include\xercesc" To="$(ProjectBuildPath)..\3rdPart\xercesc" />
+	</AdditionalCopyFiles>
+	<!--AdditionalIncludeDirectories-->
+	<AdditionalIncludeDirectories>
+		<Item Path="../" />
+		<Item Path="$(ProjectBuildPath)..\3rdPart" />
+	</AdditionalIncludeDirectories>
+	<!--AdditionalDependencies-->
+	<AdditionalDependencies></AdditionalDependencies>
+	<!--AdditionalLibraryDirectories-->
+	<AdditionalLibraryDirectories></AdditionalLibraryDirectories>
 </Project>

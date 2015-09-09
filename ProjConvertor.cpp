@@ -197,6 +197,80 @@ boost::optional<SProjectInfo> ReadConfig()
 		}
 	}
 
+	{//AdditionalCopyFiles
+		auto additionalCopyFiles = configXml.get_child_optional("Project.AdditionalCopyFiles");
+		if ( additionalCopyFiles )
+		{
+			for ( auto& curCpy : *additionalCopyFiles )
+			{
+				if ( curCpy.first == "File" )
+				{
+					bfs::path file = curCpy.second.get<std::string>("<xmlattr>.From");
+					bfs::path to = PathConverter::GetInstance().ConvertPath(curCpy.second.get<std::string>("<xmlattr>.To"), projInfo);
+					to = bfs::system_complete(to);
+					
+					if ( bfs::exists(file) )
+					{
+						bfs::create_directories(to);
+						bfs::copy_file(file, to / file.filename(), bfs::copy_option::overwrite_if_exists);
+					}
+				}
+				else if ( curCpy.first == "Folder")
+				{
+					bfs::path folder = curCpy.second.get<std::string>("<xmlattr>.From");
+					bfs::path to = PathConverter::GetInstance().ConvertPath(curCpy.second.get<std::string>("<xmlattr>.To"), projInfo);
+					to = bfs::system_complete(to);
+
+					if ( bfs::is_directory(folder) && bfs::exists(folder) )
+					{
+						auto itor = bfs::recursive_directory_iterator(folder);
+						auto end = bfs::recursive_directory_iterator();
+						for ( auto& curFile : boost::make_iterator_range(itor, end) )
+						{
+							if ( bfs::is_directory(curFile) )
+							{
+								continue;
+							}
+
+							auto newPath = to / RelativeTo(folder, curFile);
+							bfs::create_directories(newPath.parent_path());
+							bfs::copy_file(curFile, newPath, bfs::copy_option::overwrite_if_exists);
+						}
+						
+					}
+				}
+			}
+		}
+	}
+
+	{//IgnoreCustomBuild
+		auto ignoreCustomBuild = configXml.get_child_optional("Project.IgnoreCustomBuild");
+		if ( ignoreCustomBuild )
+		{
+			for ( auto& curAdditionalDep : *ignoreCustomBuild )
+			{
+				auto name = curAdditionalDep.second.get_optional<std::string>("<xmlattr>.Name");
+				if ( name )
+				{
+					projInfo.IgnoreCustomBuild.insert(*name);
+				}
+			}
+		}
+	}
+
+	auto additionalIncs = configXml.get_child_optional("Project.AdditionalIncludeDirectories");
+	if ( additionalIncs )
+	{
+		for ( auto& curAdditionalInc : *additionalIncs )
+		{
+			auto item = curAdditionalInc.second.get_optional<std::string>("<xmlattr>.Path");
+			if ( item )
+			{
+				projInfo.AdditionalIncludeDirectories.push_back(PathConverter::GetInstance().ConvertPath(*item, projInfo));
+			}
+		}
+	}
+
 	auto additionalDepends = configXml.get_child_optional("Project.AdditionalDependencies");
 	if ( additionalDepends )
 	{
@@ -352,7 +426,7 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 						for ( auto& curStr : boost::make_iterator_range(itor, itorEnd) )
 						{
 							auto predef = curStr.str(1);
-							if ( predef != "BOOST_ALL_NO_LIB" )
+							//if ( predef != "BOOST_ALL_NO_LIB" )
 							{
 								finalStr += curStr.str(1) + ";";
 							}
@@ -408,6 +482,14 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 
 			for ( auto& curItemGroup : curProjItem.second )
 			{
+				if ( curItemGroup.first == "CustomBuild" )
+				{
+					auto customFile = curItemGroup.second.get<std::string>("<xmlattr>.Include");
+					if ( projInfo.IgnoreCustomBuild.find(customFile) != projInfo.IgnoreCustomBuild.end() )
+					{
+						continue;
+					}
+				}
 				if ( curItemGroup.first == "ClInclude" )//TODO:HÎÄ¼þ
 				{
 					ptree tmpFile;

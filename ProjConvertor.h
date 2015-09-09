@@ -7,6 +7,7 @@
 
 #include <regex>
 #include <vector>
+#include <set>
 
 using namespace boost::property_tree;
 namespace bfs = boost::filesystem;
@@ -30,6 +31,8 @@ public:
 	bfs::path	ProjectBuildPath;
 	SSrcDir		VCXProjectPath;
 	SrcDirList	SrcList;
+	std::set<std::string>	IgnoreCustomBuild;
+	Vector		AdditionalCopyFiles;
 	Vector		AdditionalIncludeDirectories;
 	Vector		AdditionalDependencies;
 	Vector		AdditionalLibraryDirectories;
