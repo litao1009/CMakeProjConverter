@@ -15,15 +15,21 @@ class SProjectInfo
 {
 public:
 
+	class	SSrcDir
+	{
+	public:
+		bfs::path	From_;
+		bfs::path	To_;
+		bool		AddToIncludeDir_ = false;
+	};
+
 	typedef	std::vector<std::string>	Vector;
+	typedef	std::vector<SSrcDir>		SrcDirList;
 
 	std::string	TargetName;
-	bfs::path	ProjectPath;
 	bfs::path	ProjectBuildPath;
-	bfs::path	IncludeBuildPath;
-	bfs::path	IncludeRootPath;
-	bfs::path	SrcBuildPath;
-	bfs::path	SrcRootPath;
+	SSrcDir		VCXProjectPath;
+	SrcDirList	SrcList;
 	Vector		AdditionalIncludeDirectories;
 	Vector		AdditionalDependencies;
 	Vector		AdditionalLibraryDirectories;

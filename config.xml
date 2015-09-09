@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
 	<TargetName Name="FreeCADBase"/>
-	<ProjectPath Path="F:\FreeCAD_sf_master\Build\src\Base"/>
-	<ProjectBuildPath Path="F:\3rd\FreeCAD\FreeCADBase\proj"/>
-	<IncludeRootPath Path="F:\FreeCAD_sf_master\src\Base\"/>
-	<IncludeBuildPath Path="F:\3rd\FreeCAD\FreeCADBase\include"/>
-	<SrcBuildPath Path="F:\3rd\FreeCAD\FreeCADBase\src"/>
-	<SrcRootPath Path="F:\FreeCAD_sf_master\src\Base"/>
-	<AdditionalIncludeDirectories>
-		<Item Path="$(ProjectDir)../include/"/>
-		<Item Path="$(ProjectDir)../src/"/>
-	</AdditionalIncludeDirectories>
+	<ProjectBuildPath Path="F:\3rd\FreeCAD\FreeCADBase\"/>
+	<VCXProjectPath From="F:\FreeCAD_sf_master\Build\src\Base\" To="$(ProjectBuildPath)proj\"/>
+	<SrcDirectories>
+		<Item From="F:\FreeCAD_sf_master\src\Base\" To="$(ProjectBuildPath)Base\" AddToIncludeDir="True"/>
+		<Item From="F:\FreeCAD_sf_master\src\zipios++\" To="$(ProjectBuildPath)zipios++\" AddToIncludeDir="True"/>
+		<Item From="F:\FreeCAD_sf_master\src\CXX\" To="$(ProjectBuildPath)CXX\" AddToIncludeDir="True"/>
+	</SrcDirectories>
 	<AdditionalDependencies>
-		
 	</AdditionalDependencies>
 	<AdditionalLibraryDirectories>
-		<Item Path=""/>
 	</AdditionalLibraryDirectories>
 </Project>
