@@ -113,15 +113,18 @@ bfs::path RelativeTo(const bfs::path& from, const bfs::path& to)
 
 boost::optional<SProjectInfo> ReadConfig()
 {
+	
 	SProjectInfo projInfo;
 
-	if ( !bfs::exists("config.xml") )
+	bfs::path cfgFile = "config_App.xml";
+
+	if ( !bfs::exists(cfgFile) )
 	{
 		std::cerr << "Need Config File." << std::endl;
 		return boost::none;
 	}
 
-	boost::filesystem::ifstream configIfs("config.xml");
+	boost::filesystem::ifstream configIfs(cfgFile);
 	boost::property_tree::ptree configXml;
 
 	try
