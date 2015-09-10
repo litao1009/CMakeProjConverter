@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+	<!--TargetName-->
+	<TargetName Name="FreeCADApp" />
+	<!--ProjectBuildPath-->
+	<ProjectBuildPath Path="F:\3rd\FreeCAD\" />
+	<!--VCXProjectPath-->
+	<VCXProjectPath From="F:\FreeCAD_sf_master\Build\src\App" To="$(ProjectBuildPath)proj\" />
+	<!--SrcDirectories-->
+	<SrcDirectories>
+		<Item From="F:\FreeCAD_sf_master\src\App" To="$(ProjectBuildPath)App\" AddToIncludeDir="True" />
+	</SrcDirectories>
+	<!--IgnoreCustomBuild-->
+	<IgnoreCustomBuild>
+		<Item Name="F:\FreeCAD_sf_master\src\App\DocumentObjectGroupPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\DocumentObjectPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\DocumentPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\PropertyContainerPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\ComplexGeoDataPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\MaterialPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\FreeCADInit.py" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\FreeCADTest.py" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\CMakeLists.txt" />
+	</IgnoreCustomBuild>
+	<IgnoreInclude>
+	</IgnoreInclude>
+	<IgnoreCompile>
+	</IgnoreCompile>
+	<!--AdditionalCopyFiles-->
+	<AdditionalCopyFiles>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\ComplexGeoDataPy.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\ComplexGeoDataPy.cpp" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\DocumentObjectGroupPy.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\DocumentObjectGroupPy.cpp" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\DocumentObjectPy.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\DocumentObjectPy.cpp" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\DocumentPy.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\DocumentPy.cpp" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\InitScript.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\TestScript.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\MaterialPy.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\MaterialPy.cpp" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\PropertyContainerPy.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\PropertyContainerPy.cpp" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Build\Version.h" To="$(ProjectBuildPath)Build\"/>
+	</AdditionalCopyFiles>
+	<!--AdditionalIncludeDirectories-->
+	<AdditionalIncludeDirectories>
+		<Item Path="../" />
+		<Item Path="../3rdPart" />
+		<Item Path="../3rdPart\python2.7" />
+		<Item Path="../3rdPart\zlib" />
+		<Item Path="../3rdPart\Qt" />
+	</AdditionalIncludeDirectories>
+	<!--AdditionalDependencies-->
+	<AdditionalDependencies>
+		<Item Path="python27_d.lib" />
+	</AdditionalDependencies>
+	<!--AdditionalLibraryDirectories-->
+	<AdditionalLibraryDirectories>
+		<Item Path="../3rdPart/lib" />
+	</AdditionalLibraryDirectories>
+</Project>
