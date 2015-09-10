@@ -347,7 +347,7 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 	{
 		if ( bfs::exists(curSrcDir.To_) )
 		{
-			bfs::remove_all(curSrcDir.To_);
+			//bfs::remove_all(curSrcDir.To_);
 		}
 
 		bfs::create_directories(curSrcDir.To_);
