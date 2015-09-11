@@ -104,45 +104,46 @@
 	<AdditionalIncludeDirectories>
 		<Item Path="../" />
 		<Item Path="../3rdPart" />
-		<Item Path="../3rdPart/oce" />
 		<Item Path="../3rdPart/python2.7" />
-		<Item Path="../3rdPart/zlib" />
 		<Item Path="../3rdPart/Qt" />
-		<Item Path="../3rdPart/freetype2" />
+		<Item Path="$(SolutionDir)../externals/zlib/include/zlib" />
+		<Item Path="$(SolutionDir)../externals/freetype/include/freetype" />
+		<Item Path="$(SolutionDir)../externals/OpenCasCade/inc" />
 	</AdditionalIncludeDirectories>
 	<!--AdditionalDependencies-->
 	<AdditionalDependencies>
-		<Item Path="TKIGESd.lib" />
-		<Item Path="TKSTLd.lib" />
-		<Item Path="TKOffsetd.lib" />
-		<Item Path="TKSTEPd.lib" />
-		<Item Path="TKSTEPAttrd.lib" />
-		<Item Path="TKHLRd.lib" />
-		<Item Path="TKFeatd.lib" />
-		<Item Path="TKFilletd.lib" />
-		<Item Path="TKMeshd.lib" />
-		<Item Path="TKSTEP209d.lib" />
-		<Item Path="TKSTEPBased.lib" />
-		<Item Path="TKXSBased.lib" />
-		<Item Path="TKBoold.lib" />
-		<Item Path="TKShHealingd.lib" />
-		<Item Path="TKBOd.lib" />
-		<Item Path="TKPrimd.lib" />
-		<Item Path="TKTopAlgod.lib" />
-		<Item Path="TKGeomAlgod.lib" />
-		<Item Path="TKBRepd.lib" />
-		<Item Path="TKGeomBased.lib" />
-		<Item Path="TKG3dd.lib" />
-		<Item Path="TKG2dd.lib" />
-		<Item Path="TKMathd.lib" />
-		<Item Path="TKerneld.lib" />
-		<Item Path="python27_d.lib" />
-		<Item Path="xerces-c_3D.lib" />
-		<Item Path="zlib.lib" />
-		<Item Path="freetyped.lib" />
+		<Item Path="TKIGES.lib" />
+		<Item Path="TKSTL.lib" />
+		<Item Path="TKOffset.lib" />
+		<Item Path="TKSTEP.lib" />
+		<Item Path="TKSTEPAttr.lib" />
+		<Item Path="TKHLR.lib" />
+		<Item Path="TKFeat.lib" />
+		<Item Path="TKFillet.lib" />
+		<Item Path="TKMesh.lib" />
+		<Item Path="TKSTEP209.lib" />
+		<Item Path="TKSTEPBase.lib" />
+		<Item Path="TKXSBase.lib" />
+		<Item Path="TKBool.lib" />
+		<Item Path="TKShHealing.lib" />
+		<Item Path="TKBO.lib" />
+		<Item Path="TKPrim.lib" />
+		<Item Path="TKTopAlgo.lib" />
+		<Item Path="TKGeomAlgo.lib" />
+		<Item Path="TKBRep.lib" />
+		<Item Path="TKGeomBase.lib" />
+		<Item Path="TKG3d.lib" />
+		<Item Path="TKG2d.lib" />
+		<Item Path="TKMath.lib" />
+		<Item Path="TKernel.lib" />
+		<Item Path="python27.lib" />
+		<Item Path="xerces-c_3.lib" />
+		<Item Path="$(SolutionDir)../externals/zlib/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/zlib.lib" />
+		<Item Path="$(SolutionDir)../externals/freetype/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/freetype.lib" />
 	</AdditionalDependencies>
 	<!--AdditionalLibraryDirectories-->
 	<AdditionalLibraryDirectories>
 		<Item Path="../3rdPart/lib" />
+		<Item Path="$(SolutionDir)../externals/OpenCasCade/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/" />
 	</AdditionalLibraryDirectories>
 </Project>

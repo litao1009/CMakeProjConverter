@@ -49,12 +49,13 @@
 		<Item Path="../" />
 		<Item Path="../3rdPart" />
 		<Item Path="../3rdPart\python2.7" />
-		<Item Path="../3rdPart\zlib" />
 		<Item Path="../3rdPart\Qt" />
+		<Item Path="$(SolutionDir)../externals/zlib/include/zlib" />
 	</AdditionalIncludeDirectories>
 	<!--AdditionalDependencies-->
 	<AdditionalDependencies>
-		<Item Path="python27_d.lib" />
+		<Item Path="python27.lib" />
+		<Item Path="xerces-c_3.lib" />
 	</AdditionalDependencies>
 	<!--AdditionalLibraryDirectories-->
 	<AdditionalLibraryDirectories>

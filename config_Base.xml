@@ -13,7 +13,7 @@
 		<Item From="F:\FreeCAD_sf_master\src\CXX\" To="$(ProjectBuildPath)CXX\" AddToIncludeDir="True" />
 	</SrcDirectories>
 	<!--IgnoreCustomBuild-->
-	<IgnoreCustomBuild>
+	<IgnoreCustomBuild All="True">
 		<Item Name="F:\FreeCAD_sf_master\src\Base\Debugger.h" />
 		<Item Name="F:\FreeCAD_sf_master\src\Base\FutureWatcherProgress.h" />
 		<Item Name="F:\FreeCAD_sf_master\src\Base\AxisPy.xml" />
@@ -70,11 +70,17 @@
 		<Item Path="../" />
 		<Item Path="../3rdPart" />
 		<Item Path="../3rdPart\python2.7" />
-		<Item Path="../3rdPart\zlib" />
 		<Item Path="../3rdPart\Qt" />
+		<Item Path="$(SolutionDir)../externals/zlib/include/zlib" />
 	</AdditionalIncludeDirectories>
 	<!--AdditionalDependencies-->
-	<AdditionalDependencies></AdditionalDependencies>
+	<AdditionalDependencies>
+		<Item Path="python27.lib" />
+		<Item Path="xerces-c_3.lib" />
+		<Item Path="$(SolutionDir)../externals/zlib/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/zlib.lib" />
+	</AdditionalDependencies>
 	<!--AdditionalLibraryDirectories-->
-	<AdditionalLibraryDirectories></AdditionalLibraryDirectories>
+	<AdditionalLibraryDirectories>
+		<Item Path="../3rdPart/lib" />
+	</AdditionalLibraryDirectories>
 </Project>
