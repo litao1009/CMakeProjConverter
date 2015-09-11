@@ -116,7 +116,7 @@ boost::optional<SProjectInfo> ReadConfig()
 	
 	SProjectInfo projInfo;
 
-	bfs::path cfgFile = "config_Part.xml";
+	bfs::path cfgFile = "config_Sketcher.xml";
 
 	if ( !bfs::exists(cfgFile) )
 	{
@@ -505,6 +505,11 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 					}
 				}
 
+				if ( curItemGroup.first == "ProjectReference" )
+				{
+					continue;
+				}
+
 				if ( curItemGroup.first == "ClInclude" )//TODO:HÎÄ¼þ
 				{
 					ptree tmpFile;
@@ -527,6 +532,7 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 						}
 
 						auto cpyPath = curDir.To_ / curRelPath;
+						bfs::create_directories(cpyPath.parent_path());
 						bfs::copy_file(filePath, cpyPath, bfs::copy_option::overwrite_if_exists);
 
 						auto relFromProj = RelativeTo(projInfo.VCXProjectPath.To_, cpyPath);
@@ -695,7 +701,8 @@ bool	BuildFilter(const SProjectInfo& projInfo)
 							auto found = false;
 							for ( auto& curDir : projInfo.SrcList )
 							{
-								if ( curDir.From_ != parentPath )
+								auto tP = RelativeTo(curDir.From_, parentPath);
+								if ( !tP.empty() && *tP.begin() == ".." )
 								{
 									continue;
 								}

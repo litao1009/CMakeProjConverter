@@ -112,7 +112,6 @@
 	</AdditionalIncludeDirectories>
 	<!--AdditionalDependencies-->
 	<AdditionalDependencies>
-		<Item Path="freetype.lib" />
 		<Item Path="TKIGESd.lib" />
 		<Item Path="TKSTLd.lib" />
 		<Item Path="TKOffsetd.lib" />
