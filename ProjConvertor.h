@@ -32,6 +32,7 @@ public:
 	SSrcDir		VCXProjectPath;
 	SrcDirList	SrcList;
 	std::set<std::string>	IgnoreCustomBuild;
+	bool		IgnoreAllCustomBuild = false;
 	Vector		AdditionalCopyFiles;
 	Vector		AdditionalIncludeDirectories;
 	Vector		AdditionalDependencies;

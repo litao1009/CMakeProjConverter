@@ -116,7 +116,7 @@ boost::optional<SProjectInfo> ReadConfig()
 	
 	SProjectInfo projInfo;
 
-	bfs::path cfgFile = "config_App.xml";
+	bfs::path cfgFile = "config_Part.xml";
 
 	if ( !bfs::exists(cfgFile) )
 	{
@@ -250,6 +250,12 @@ boost::optional<SProjectInfo> ReadConfig()
 		auto ignoreCustomBuild = configXml.get_child_optional("Project.IgnoreCustomBuild");
 		if ( ignoreCustomBuild )
 		{
+			auto ignoreAll = (*ignoreCustomBuild).get_optional<std::string>("<xmlattr>.All");
+			if ( ignoreAll )
+			{
+				projInfo.IgnoreAllCustomBuild = *ignoreAll == "True";
+			}
+
 			for ( auto& curAdditionalDep : *ignoreCustomBuild )
 			{
 				auto name = curAdditionalDep.second.get_optional<std::string>("<xmlattr>.Name");
@@ -487,12 +493,18 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 			{
 				if ( curItemGroup.first == "CustomBuild" )
 				{
+					if ( projInfo.IgnoreAllCustomBuild )
+					{
+						continue;
+					}
+
 					auto customFile = curItemGroup.second.get<std::string>("<xmlattr>.Include");
 					if ( projInfo.IgnoreCustomBuild.find(customFile) != projInfo.IgnoreCustomBuild.end() )
 					{
 						continue;
 					}
 				}
+
 				if ( curItemGroup.first == "ClInclude" )//TODO:HÎÄ¼þ
 				{
 					ptree tmpFile;
@@ -655,6 +667,20 @@ bool	BuildFilter(const SProjectInfo& projInfo)
 				}
 				else
 				{
+					if ( curItem.first == "CustomBuild" )
+					{
+						if ( projInfo.IgnoreAllCustomBuild )
+						{
+							continue;
+						}
+
+						auto customFile = curItem.second.get<std::string>("<xmlattr>.Include");
+						if ( projInfo.IgnoreCustomBuild.find(customFile) != projInfo.IgnoreCustomBuild.end() )
+						{
+							continue;
+						}
+					}
+
 					ptree item; //Compile
 
 					for ( auto& curItemProperty : curItem.second )
