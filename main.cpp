@@ -2,15 +2,13 @@
 
 int main()
 {
-	auto projInfoOpt = ReadConfig();
-	if ( !projInfoOpt )
+	auto projList = ReadConfig();
+	
+	for ( auto& curProj : projList )
 	{
-		return 0;
-	}
-
-	auto& projInfo = *projInfoOpt;
-	if ( !BuildProject(projInfo) )
-	{
-		return 0;
-	}
+		if ( !BuildProject(curProj) )
+		{
+			return 0;
+		}
+	}	
 }

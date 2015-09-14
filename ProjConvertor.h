@@ -3,7 +3,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/filesystem/path.hpp>
-#include <boost/optional.hpp>
+
 
 #include <regex>
 #include <vector>
@@ -39,5 +39,7 @@ public:
 	Vector		AdditionalLibraryDirectories;
 };
 
-boost::optional<SProjectInfo>	ReadConfig();
+typedef	std::vector<SProjectInfo>	ProjectList;
+
+ProjectList		ReadConfig();
 bool			BuildProject(const SProjectInfo& projInfo);

@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project TargetName="FreeCADApp">
+	<!--ProjectBuildPath-->
+	<ProjectBuildPath Path="F:\3rd\FreeCAD\" />
+	<!--VCXProjectPath-->
+	<VCXProjectPath From="F:\FreeCAD_sf_master\Build\src\App" To="$(ProjectBuildPath)proj\" />
+	<!--SrcDirectories-->
+	<SrcDirectories>
+		<Item From="F:\FreeCAD_sf_master\src\App" To="$(ProjectBuildPath)App\" AddToIncludeDir="True" />
+	</SrcDirectories>
+	<!--IgnoreCustomBuild-->
+	<IgnoreCustomBuild All="True">
+		<Item Name="F:\FreeCAD_sf_master\src\App\DocumentObjectGroupPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\DocumentObjectPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\DocumentPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\PropertyContainerPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\ComplexGeoDataPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\MaterialPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\FreeCADInit.py" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\FreeCADTest.py" />
+		<Item Name="F:\FreeCAD_sf_master\src\App\CMakeLists.txt" />
+	</IgnoreCustomBuild>
+	<IgnoreInclude>
+	</IgnoreInclude>
+	<IgnoreCompile>
+	</IgnoreCompile>
+	<!--AdditionalCopyFiles-->
+	<AdditionalCopyFiles>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\ComplexGeoDataPy.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\ComplexGeoDataPy.cpp" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\DocumentObjectGroupPy.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\DocumentObjectGroupPy.cpp" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\DocumentObjectPy.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\DocumentObjectPy.cpp" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\DocumentPy.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\DocumentPy.cpp" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\InitScript.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\TestScript.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\MaterialPy.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\MaterialPy.cpp" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\PropertyContainerPy.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\App\PropertyContainerPy.cpp" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Build\Version.h" To="$(ProjectBuildPath)Build\"/>
+	</AdditionalCopyFiles>
+	<!--AdditionalIncludeDirectories-->
+	<AdditionalIncludeDirectories>
+		<Item Path="../" />
+		<Item Path="../3rdPart" />
+		<Item Path="../3rdPart/python2.7" />
+		<Item Path="../3rdPart/Qt" />
+		<Item Path="$(SolutionDir)../externals/zlib/include/zlib" />
+	</AdditionalIncludeDirectories>
+	<!--AdditionalDependencies-->
+	<AdditionalDependencies>
+		<Item Path="python27.lib" />
+		<Item Path="xerces-c_3.lib" />
+	</AdditionalDependencies>
+	<!--AdditionalLibraryDirectories-->
+	<AdditionalLibraryDirectories>
+		<Item Path="../3rdPart/lib" />
+	</AdditionalLibraryDirectories>
+</Project>
+<Project TargetName="FreeCADBase">
+	<!--ProjectBuildPath-->
+	<ProjectBuildPath Path="F:\3rd\FreeCAD\" />
+	<!--VCXProjectPath-->
+	<VCXProjectPath From="F:\FreeCAD_sf_master\Build\src\Base\" To="$(ProjectBuildPath)proj\" />
+	<!--SrcDirectories-->
+	<SrcDirectories>
+		<Item From="F:\FreeCAD_sf_master\src\Base\" To="$(ProjectBuildPath)Base\" AddToIncludeDir="True" />
+		<Item From="F:\FreeCAD_sf_master\src\zipios++\" To="$(ProjectBuildPath)zipios++\" AddToIncludeDir="True" />
+		<Item From="F:\FreeCAD_sf_master\src\CXX\" To="$(ProjectBuildPath)CXX\" AddToIncludeDir="True" />
+	</SrcDirectories>
+	<!--IgnoreCustomBuild-->
+	<IgnoreCustomBuild All="True">
+		<Item Name="F:\FreeCAD_sf_master\src\Base\Debugger.h" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\FutureWatcherProgress.h" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\AxisPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\BaseClassPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\BoundBoxPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\MatrixPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\PersistencePy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\PlacementPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\RotationPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\VectorPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\QuantityPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\UnitPy.xml" />
+		<Item Name="F:\FreeCAD_sf_master\src\Base\CMakeLists.txt" />
+	</IgnoreCustomBuild>
+	<IgnoreInclude>
+	</IgnoreInclude>
+	<IgnoreCompile>
+	</IgnoreCompile>
+	<!--AdditionalCopyFiles-->
+	<AdditionalCopyFiles>
+		<File From="F:\FreeCAD_sf_master\src\FCConfig.h" To="$(ProjectBuildPath)"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\QuantityPy.h" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\QuantityPy.cpp" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\UnitPy.h" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\UnitPy.cpp" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\MatrixPy.h" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\MatrixPy.cpp" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\RotationPy.h" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\RotationPy.cpp" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\PlacementPy.h" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\PlacementPy.cpp" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\BoundBoxPy.h" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\BoundBoxPy.cpp" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\AxisPy.h" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\AxisPy.cpp" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\VectorPy.h" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\VectorPy.cpp" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\BaseClassPy.h" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\BaseClassPy.cpp" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\PersistencePy.h" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\PersistencePy.cpp" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Base\swigpyrun.h" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\src\Base\QuantityParser.c" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\src\Base\QuantityLexer.c" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\src\Base\FutureWatcherProgress.h" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\src\Base\Debugger.h" To="$(ProjectBuildPath)Base\"/>
+		<File From="F:\FreeCAD_sf_master\src\Base\Debugger.cpp" To="$(ProjectBuildPath)Base\"/>
+		<Folder From="F:\FreeCAD_sf_master\FreeCADLibs_11.1_x86_VC12\include\xercesc" To="$(ProjectBuildPath)..\3rdPart\xercesc" />
+		<Folder From="F:\FreeCAD_sf_master\FreeCADLibs_11.1_x86_VC12\include\python2.7" To="$(ProjectBuildPath)..\3rdPart\python2.7" />
+		<Folder From="F:\FreeCAD_sf_master\src\CXX\" To="$(ProjectBuildPath)CXX\" />
+	</AdditionalCopyFiles>
+	<!--AdditionalIncludeDirectories-->
+	<AdditionalIncludeDirectories>
+		<Item Path="../" />
+		<Item Path="../3rdPart" />
+		<Item Path="../3rdPart\python2.7" />
+		<Item Path="../3rdPart\Qt" />
+		<Item Path="$(SolutionDir)../externals/zlib/include/zlib" />
+	</AdditionalIncludeDirectories>
+	<!--AdditionalDependencies-->
+	<AdditionalDependencies>
+		<Item Path="python27.lib" />
+		<Item Path="xerces-c_3.lib" />
+		<Item Path="$(SolutionDir)../externals/zlib/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/zlib.lib" />
+	</AdditionalDependencies>
+	<!--AdditionalLibraryDirectories-->
+	<AdditionalLibraryDirectories>
+		<Item Path="../3rdPart/lib" />
+	</AdditionalLibraryDirectories>
+</Project>
+<Project TargetName="Part">
+	<!--ProjectBuildPath-->
+	<ProjectBuildPath Path="F:\3rd\FreeCAD\" />
+	<!--VCXProjectPath-->
+	<VCXProjectPath From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\" To="$(ProjectBuildPath)proj\" />
+	<!--SrcDirectories-->
+	<SrcDirectories>
+		<Item From="F:\FreeCAD_sf_master\src\Mod\Part\App" To="$(ProjectBuildPath)Mod\Part\App\" AddToIncludeDir="True" />
+	</SrcDirectories>
+	<!--IgnoreCustomBuild-->
+	<IgnoreCustomBuild All="True">
+	</IgnoreCustomBuild>
+	<IgnoreInclude>
+	</IgnoreInclude>
+	<IgnoreCompile>
+	</IgnoreCompile>
+	<!--AdditionalCopyFiles-->
+	<AdditionalCopyFiles>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ArcOfCirclePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ArcOfCirclePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ArcOfEllipsePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ArcOfEllipsePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ArcOfHyperbolaPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ArcOfHyperbolaPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ArcOfParabolaPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ArcOfParabolaPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ArcPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ArcPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\BezierCurvePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\BezierCurvePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\BezierSurfacePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\BezierSurfacePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\BRepOffsetAPI_MakePipeShellPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\BRepOffsetAPI_MakePipeShellPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\BSplineCurvePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\BSplineCurvePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\BSplineSurfacePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\BSplineSurfacePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\CirclePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\CirclePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ConePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ConePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\CylinderPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\CylinderPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\EllipsePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\EllipsePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\GeometryCurvePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\GeometryCurvePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\GeometryPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\GeometryPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\GeometrySurfacePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\GeometrySurfacePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\HyperbolaPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\HyperbolaPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\LinePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\LinePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\OffsetCurvePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\OffsetCurvePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\OffsetSurfacePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\OffsetSurfacePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ParabolaPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ParabolaPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\Part2DObjectPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\Part2DObjectPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\PartFeaturePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\PartFeaturePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\PlanePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\PlanePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\PointPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\PointPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\RectangularTrimmedSurfacePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\RectangularTrimmedSurfacePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\SpherePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\SpherePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\SurfaceOfExtrusionPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\SurfaceOfExtrusionPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\SurfaceOfRevolutionPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\SurfaceOfRevolutionPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeCompoundPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeCompoundPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeCompSolidPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeCompSolidPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeEdgePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeEdgePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeFacePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeFacePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeShellPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeShellPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeSolidPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeSolidPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeVertexPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeVertexPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeWirePy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\TopoShapeWirePy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ToroidPy.h" To="$(ProjectBuildPath)Mod\Part\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Part\App\ToroidPy.cpp" To="$(ProjectBuildPath)Mod\Part\App\"/>
+	</AdditionalCopyFiles>
+	<!--AdditionalIncludeDirectories-->
+	<AdditionalIncludeDirectories>
+		<Item Path="../" />
+		<Item Path="../3rdPart" />
+		<Item Path="../3rdPart/python2.7" />
+		<Item Path="../3rdPart/Qt" />
+		<Item Path="$(SolutionDir)../externals/zlib/include/zlib" />
+		<Item Path="$(SolutionDir)../externals/freetype/include/freetype" />
+		<Item Path="$(SolutionDir)../externals/OpenCasCade/inc" />
+	</AdditionalIncludeDirectories>
+	<!--AdditionalDependencies-->
+	<AdditionalDependencies>
+		<Item Path="TKIGES.lib" />
+		<Item Path="TKSTL.lib" />
+		<Item Path="TKOffset.lib" />
+		<Item Path="TKSTEP.lib" />
+		<Item Path="TKSTEPAttr.lib" />
+		<Item Path="TKHLR.lib" />
+		<Item Path="TKFeat.lib" />
+		<Item Path="TKFillet.lib" />
+		<Item Path="TKMesh.lib" />
+		<Item Path="TKSTEP209.lib" />
+		<Item Path="TKSTEPBase.lib" />
+		<Item Path="TKXSBase.lib" />
+		<Item Path="TKBool.lib" />
+		<Item Path="TKShHealing.lib" />
+		<Item Path="TKBO.lib" />
+		<Item Path="TKPrim.lib" />
+		<Item Path="TKTopAlgo.lib" />
+		<Item Path="TKGeomAlgo.lib" />
+		<Item Path="TKBRep.lib" />
+		<Item Path="TKGeomBase.lib" />
+		<Item Path="TKG3d.lib" />
+		<Item Path="TKG2d.lib" />
+		<Item Path="TKMath.lib" />
+		<Item Path="TKernel.lib" />
+		<Item Path="python27.lib" />
+		<Item Path="xerces-c_3.lib" />
+		<Item Path="$(SolutionDir)../externals/zlib/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/zlib.lib" />
+		<Item Path="$(SolutionDir)../externals/freetype/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/freetype.lib" />
+	</AdditionalDependencies>
+	<!--AdditionalLibraryDirectories-->
+	<AdditionalLibraryDirectories>
+		<Item Path="../3rdPart/lib" />
+		<Item Path="$(SolutionDir)../externals/OpenCasCade/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/" />
+	</AdditionalLibraryDirectories>
+</Project>
+<Project TargetName="Sketcher">
+	<!--TargetName-->
+	<TargetName Name="Sketcher" />
+	<!--ProjectBuildPath-->
+	<ProjectBuildPath Path="F:\3rd\FreeCAD\" />
+	<!--VCXProjectPath-->
+	<VCXProjectPath From="F:\FreeCAD_sf_master\Build\src\Mod\Sketcher\App" To="$(ProjectBuildPath)proj\" />
+	<!--SrcDirectories-->
+	<SrcDirectories>
+		<Item From="F:\FreeCAD_sf_master\src\Mod\Sketcher\App" To="$(ProjectBuildPath)Mod\Sketcher\App\" AddToIncludeDir="True" />
+	</SrcDirectories>
+	<!--IgnoreCustomBuild-->
+	<IgnoreCustomBuild All="True">
+	</IgnoreCustomBuild>
+	<IgnoreInclude>
+	</IgnoreInclude>
+	<IgnoreCompile>
+	</IgnoreCompile>
+	<!--AdditionalCopyFiles-->
+	<AdditionalCopyFiles>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Sketcher\App\ConstraintPy.h" To="$(ProjectBuildPath)Mod\Sketcher\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Sketcher\App\ConstraintPy.cpp" To="$(ProjectBuildPath)Mod\Sketcher\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Sketcher\App\SketchObjectPy.h" To="$(ProjectBuildPath)Mod\Sketcher\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Sketcher\App\SketchObjectPy.cpp" To="$(ProjectBuildPath)Mod\Sketcher\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Sketcher\App\SketchObjectSFPy.h" To="$(ProjectBuildPath)Mod\Sketcher\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Sketcher\App\SketchObjectSFPy.cpp" To="$(ProjectBuildPath)Mod\Sketcher\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Sketcher\App\SketchPy.h" To="$(ProjectBuildPath)Mod\Sketcher\App\"/>
+		<File From="F:\FreeCAD_sf_master\Build\src\Mod\Sketcher\App\SketchPy.cpp" To="$(ProjectBuildPath)Mod\Sketcher\App\"/>
+	</AdditionalCopyFiles>
+	<!--AdditionalIncludeDirectories-->
+	<AdditionalIncludeDirectories>
+		<Item Path="../" />
+		<Item Path="../3rdPart" />
+		<Item Path="../3rdPart/python2.7" />
+		<Item Path="../3rdPart/eigen3" />
+		<Item Path="../3rdPart/Qt" />
+		<Item Path="$(SolutionDir)../externals/zlib/include/zlib" />
+		<Item Path="$(SolutionDir)../externals/OpenCasCade/inc" />
+	</AdditionalIncludeDirectories>
+	<!--AdditionalDependencies-->
+	<AdditionalDependencies>
+		<Item Path="$(SolutionDir)../externals/zlib/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/zlib.lib" />
+		<Item Path="python27.lib" />
+		<Item Path="TKIGES.lib" />
+		<Item Path="TKSTL.lib" />
+		<Item Path="TKOffset.lib" />
+		<Item Path="TKSTEP.lib" />
+		<Item Path="TKSTEPAttr.lib" />
+		<Item Path="TKHLR.lib" />
+		<Item Path="TKFeat.lib" />
+		<Item Path="TKFillet.lib" />
+		<Item Path="TKMesh.lib" />
+		<Item Path="TKSTEP209.lib" />
+		<Item Path="TKSTEPBase.lib" />
+		<Item Path="TKXSBase.lib" />
+		<Item Path="TKBool.lib" />
+		<Item Path="TKShHealing.lib" />
+		<Item Path="TKBO.lib" />
+		<Item Path="TKPrim.lib" />
+		<Item Path="TKTopAlgo.lib" />
+		<Item Path="TKGeomAlgo.lib" />
+		<Item Path="TKBRep.lib" />
+		<Item Path="TKGeomBase.lib" />
+		<Item Path="TKG3d.lib" />
+		<Item Path="TKG2d.lib" />
+		<Item Path="TKMath.lib" />
+		<Item Path="TKernel.lib" />
+	</AdditionalDependencies>
+	<!--AdditionalLibraryDirectories-->
+	<AdditionalLibraryDirectories>
+		<Item Path="../3rdPart/lib" />
+		<Item Path="$(SolutionDir)../externals/OpenCasCade/lib/$(Configuration)/$(Platform)/$(PlatformToolset)/" />
+	</AdditionalLibraryDirectories>
+</Project>

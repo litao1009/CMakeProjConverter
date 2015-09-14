@@ -111,17 +111,15 @@ bfs::path RelativeTo(const bfs::path& from, const bfs::path& to)
 	return finalPath;
 }
 
-boost::optional<SProjectInfo> ReadConfig()
+ProjectList	ReadConfig()
 {
-	
-	SProjectInfo projInfo;
+	ProjectList ret;
 
-	bfs::path cfgFile = "config_Sketcher.xml";
-
+	bfs::path cfgFile = "config.xml";
 	if ( !bfs::exists(cfgFile) )
 	{
 		std::cerr << "Need Config File." << std::endl;
-		return boost::none;
+		return ret;
 	}
 
 	boost::filesystem::ifstream configIfs(cfgFile);
@@ -134,179 +132,193 @@ boost::optional<SProjectInfo> ReadConfig()
 	catch ( std::exception& exp )
 	{
 		std::cerr << exp.what() << std::endl;
-		return boost::none;
+		return ret;
 	}
 
-	{//TargetName
-		auto targetName = configXml.get_optional<std::string>("Project.TargetName.<xmlattr>.Name");
-		if ( !targetName )
+	for ( auto& curProject : configXml )
+	{
+		if ( curProject.first != "Project" )
 		{
-			std::cerr << "Need Target Name." << std::endl;
-			return boost::none;
+			continue;
 		}
-		projInfo.TargetName = *targetName;
-	}
 
-	{//ProjectBuildPath
-		auto projPath = configXml.get_optional<std::string>("Project.ProjectBuildPath.<xmlattr>.Path");
-		if ( !projPath )
-		{
-			std::cerr << "Need Project Path." << std::endl;
-			return boost::none;
-		}
-		projInfo.ProjectBuildPath = bfs::system_complete(*projPath);
-		projInfo.ProjectBuildPath.remove_trailing_separator();
-	}
+		auto& curXML = curProject.second;
 
-	{//VCXProjectPath
-		auto vcxFromPath = configXml.get_optional<std::string>("Project.VCXProjectPath.<xmlattr>.From");
-		auto vcxToPath = configXml.get_optional<std::string>("Project.VCXProjectPath.<xmlattr>.To");
-		if ( !vcxFromPath )
-		{
-			std::cerr << "Need Project Build Path." << std::endl;
-			return boost::none;
-		}
-		projInfo.VCXProjectPath.From_ = bfs::system_complete(*vcxFromPath);
-		projInfo.VCXProjectPath.To_ = bfs::system_complete(PathConverter::GetInstance().ConvertPath(*vcxToPath, projInfo));
+		SProjectInfo projInfo;
 
-		projInfo.VCXProjectPath.From_.remove_trailing_separator();
-		projInfo.VCXProjectPath.To_.remove_trailing_separator();
-	}
-
-	{//SrcDirectories
-		auto srcDirectories = configXml.get_child_optional("Project.SrcDirectories");
-		if ( srcDirectories )
-		{
-			for ( auto& curAdditionalDep : *srcDirectories )
+		{//TargetName
+			auto targetName = curXML.get_optional<std::string>("<xmlattr>.TargetName");
+			if ( !targetName )
 			{
-				auto from = curAdditionalDep.second.get_optional<std::string>("<xmlattr>.From");
-				auto to = curAdditionalDep.second.get_optional<std::string>("<xmlattr>.To");
-				auto addToIncDir = curAdditionalDep.second.get_optional<std::string>("<xmlattr>.AddToIncludeDir");
+				std::cerr << "Need Target Name." << std::endl;
+				return ret;
+			}
+			projInfo.TargetName = *targetName;
+		}
 
-				SProjectInfo::SSrcDir newDir;
-				newDir.From_ = bfs::system_complete(*from);
-				newDir.To_ = bfs::system_complete(PathConverter::GetInstance().ConvertPath(*to, projInfo));
-				newDir.AddToIncludeDir_ = *addToIncDir == "True";
+		{//ProjectBuildPath
+			auto projPath = curXML.get_optional<std::string>("ProjectBuildPath.<xmlattr>.Path");
+			if ( !projPath )
+			{
+				std::cerr << "Need Project Path." << std::endl;
+				return ret;
+			}
+			projInfo.ProjectBuildPath = bfs::system_complete(*projPath);
+			projInfo.ProjectBuildPath.remove_trailing_separator();
+		}
 
-				newDir.From_.remove_trailing_separator();
-				newDir.To_.remove_trailing_separator();
-				projInfo.SrcList.push_back(newDir);
+		{//VCXProjectPath
+			auto vcxFromPath = curXML.get_optional<std::string>("VCXProjectPath.<xmlattr>.From");
+			auto vcxToPath = curXML.get_optional<std::string>("VCXProjectPath.<xmlattr>.To");
+			if ( !vcxFromPath )
+			{
+				std::cerr << "Need Project Build Path." << std::endl;
+				return ret;
+			}
+			projInfo.VCXProjectPath.From_ = bfs::system_complete(*vcxFromPath);
+			projInfo.VCXProjectPath.To_ = bfs::system_complete(PathConverter::GetInstance().ConvertPath(*vcxToPath, projInfo));
 
-				if ( newDir.AddToIncludeDir_ )
+			projInfo.VCXProjectPath.From_.remove_trailing_separator();
+			projInfo.VCXProjectPath.To_.remove_trailing_separator();
+		}
+
+		{//SrcDirectories
+			auto srcDirectories = curXML.get_child_optional("SrcDirectories");
+			if ( srcDirectories )
+			{
+				for ( auto& curAdditionalDep : *srcDirectories )
 				{
-					projInfo.AdditionalIncludeDirectories.push_back(RelativeTo(projInfo.VCXProjectPath.To_, newDir.To_).string());
+					auto from = curAdditionalDep.second.get_optional<std::string>("<xmlattr>.From");
+					auto to = curAdditionalDep.second.get_optional<std::string>("<xmlattr>.To");
+					auto addToIncDir = curAdditionalDep.second.get_optional<std::string>("<xmlattr>.AddToIncludeDir");
+
+					SProjectInfo::SSrcDir newDir;
+					newDir.From_ = bfs::system_complete(*from);
+					newDir.To_ = bfs::system_complete(PathConverter::GetInstance().ConvertPath(*to, projInfo));
+					newDir.AddToIncludeDir_ = *addToIncDir == "True";
+
+					newDir.From_.remove_trailing_separator();
+					newDir.To_.remove_trailing_separator();
+					projInfo.SrcList.push_back(newDir);
+
+					if ( newDir.AddToIncludeDir_ )
+					{
+						projInfo.AdditionalIncludeDirectories.push_back(RelativeTo(projInfo.VCXProjectPath.To_, newDir.To_).string());
+					}
 				}
 			}
 		}
-	}
 
-	{//AdditionalCopyFiles
-		auto additionalCopyFiles = configXml.get_child_optional("Project.AdditionalCopyFiles");
-		if ( additionalCopyFiles )
-		{
-			for ( auto& curCpy : *additionalCopyFiles )
+		{//AdditionalCopyFiles
+			auto additionalCopyFiles = curXML.get_child_optional("AdditionalCopyFiles");
+			if ( additionalCopyFiles )
 			{
-				if ( curCpy.first == "File" )
+				for ( auto& curCpy : *additionalCopyFiles )
 				{
-					bfs::path file = curCpy.second.get<std::string>("<xmlattr>.From");
-					bfs::path to = PathConverter::GetInstance().ConvertPath(curCpy.second.get<std::string>("<xmlattr>.To"), projInfo);
-					to = bfs::system_complete(to);
-					
-					if ( bfs::exists(file) )
+					if ( curCpy.first == "File" )
 					{
-						bfs::create_directories(to);
-						bfs::copy_file(file, to / file.filename(), bfs::copy_option::overwrite_if_exists);
-					}
-				}
-				else if ( curCpy.first == "Folder")
-				{
-					bfs::path folder = curCpy.second.get<std::string>("<xmlattr>.From");
-					bfs::path to = PathConverter::GetInstance().ConvertPath(curCpy.second.get<std::string>("<xmlattr>.To"), projInfo);
-					to = bfs::system_complete(to);
+						bfs::path file = curCpy.second.get<std::string>("<xmlattr>.From");
+						bfs::path to = PathConverter::GetInstance().ConvertPath(curCpy.second.get<std::string>("<xmlattr>.To"), projInfo);
+						to = bfs::system_complete(to);
 
-					if ( bfs::is_directory(folder) && bfs::exists(folder) )
-					{
-						auto itor = bfs::recursive_directory_iterator(folder);
-						auto end = bfs::recursive_directory_iterator();
-						for ( auto& curFile : boost::make_iterator_range(itor, end) )
+						if ( bfs::exists(file) )
 						{
-							if ( bfs::is_directory(curFile) )
+							bfs::create_directories(to);
+							bfs::copy_file(file, to / file.filename(), bfs::copy_option::overwrite_if_exists);
+						}
+					}
+					else if ( curCpy.first == "Folder" )
+					{
+						bfs::path folder = curCpy.second.get<std::string>("<xmlattr>.From");
+						bfs::path to = PathConverter::GetInstance().ConvertPath(curCpy.second.get<std::string>("<xmlattr>.To"), projInfo);
+						to = bfs::system_complete(to);
+
+						if ( bfs::is_directory(folder) && bfs::exists(folder) )
+						{
+							auto itor = bfs::recursive_directory_iterator(folder);
+							auto end = bfs::recursive_directory_iterator();
+							for ( auto& curFile : boost::make_iterator_range(itor, end) )
 							{
-								continue;
+								if ( bfs::is_directory(curFile) )
+								{
+									continue;
+								}
+
+								auto newPath = to / RelativeTo(folder, curFile);
+								bfs::create_directories(newPath.parent_path());
+								bfs::copy_file(curFile, newPath, bfs::copy_option::overwrite_if_exists);
 							}
 
-							auto newPath = to / RelativeTo(folder, curFile);
-							bfs::create_directories(newPath.parent_path());
-							bfs::copy_file(curFile, newPath, bfs::copy_option::overwrite_if_exists);
 						}
-						
 					}
 				}
 			}
 		}
-	}
 
-	{//IgnoreCustomBuild
-		auto ignoreCustomBuild = configXml.get_child_optional("Project.IgnoreCustomBuild");
-		if ( ignoreCustomBuild )
-		{
-			auto ignoreAll = (*ignoreCustomBuild).get_optional<std::string>("<xmlattr>.All");
-			if ( ignoreAll )
+		{//IgnoreCustomBuild
+			auto ignoreCustomBuild = curXML.get_child_optional("IgnoreCustomBuild");
+			if ( ignoreCustomBuild )
 			{
-				projInfo.IgnoreAllCustomBuild = *ignoreAll == "True";
-			}
-
-			for ( auto& curAdditionalDep : *ignoreCustomBuild )
-			{
-				auto name = curAdditionalDep.second.get_optional<std::string>("<xmlattr>.Name");
-				if ( name )
+				auto ignoreAll = (*ignoreCustomBuild).get_optional<std::string>("<xmlattr>.All");
+				if ( ignoreAll )
 				{
-					projInfo.IgnoreCustomBuild.insert(*name);
+					projInfo.IgnoreAllCustomBuild = *ignoreAll == "True";
+				}
+
+				for ( auto& curAdditionalDep : *ignoreCustomBuild )
+				{
+					auto name = curAdditionalDep.second.get_optional<std::string>("<xmlattr>.Name");
+					if ( name )
+					{
+						projInfo.IgnoreCustomBuild.insert(*name);
+					}
 				}
 			}
 		}
-	}
 
-	auto additionalIncs = configXml.get_child_optional("Project.AdditionalIncludeDirectories");
-	if ( additionalIncs )
-	{
-		for ( auto& curAdditionalInc : *additionalIncs )
+		auto additionalIncs = curXML.get_child_optional("AdditionalIncludeDirectories");
+		if ( additionalIncs )
 		{
-			auto item = curAdditionalInc.second.get_optional<std::string>("<xmlattr>.Path");
-			if ( item )
+			for ( auto& curAdditionalInc : *additionalIncs )
 			{
-				projInfo.AdditionalIncludeDirectories.push_back(PathConverter::GetInstance().ConvertPath(*item, projInfo));
+				auto item = curAdditionalInc.second.get_optional<std::string>("<xmlattr>.Path");
+				if ( item )
+				{
+					projInfo.AdditionalIncludeDirectories.push_back(PathConverter::GetInstance().ConvertPath(*item, projInfo));
+				}
 			}
 		}
-	}
 
-	auto additionalDepends = configXml.get_child_optional("Project.AdditionalDependencies");
-	if ( additionalDepends )
-	{
-		for ( auto& curAdditionalDep : *additionalDepends )
+		auto additionalDepends = curXML.get_child_optional("AdditionalDependencies");
+		if ( additionalDepends )
 		{
-			auto item = curAdditionalDep.second.get_optional<std::string>("<xmlattr>.Path");
-			if ( item )
+			for ( auto& curAdditionalDep : *additionalDepends )
 			{
-				projInfo.AdditionalDependencies.push_back(*item);
+				auto item = curAdditionalDep.second.get_optional<std::string>("<xmlattr>.Path");
+				if ( item )
+				{
+					projInfo.AdditionalDependencies.push_back(*item);
+				}
 			}
 		}
-	}
 
-	auto additionalLibsDirs = configXml.get_child_optional("Project.AdditionalLibraryDirectories");
-	if ( additionalLibsDirs )
-	{
-		for ( auto& curAdditionalLibDir : *additionalLibsDirs )
+		auto additionalLibsDirs = curXML.get_child_optional("AdditionalLibraryDirectories");
+		if ( additionalLibsDirs )
 		{
-			auto item = curAdditionalLibDir.second.get_optional<std::string>("<xmlattr>.Path");
-			if ( item )
+			for ( auto& curAdditionalLibDir : *additionalLibsDirs )
 			{
-				projInfo.AdditionalLibraryDirectories.push_back(*item);
+				auto item = curAdditionalLibDir.second.get_optional<std::string>("<xmlattr>.Path");
+				if ( item )
+				{
+					projInfo.AdditionalLibraryDirectories.push_back(*item);
+				}
 			}
 		}
-	}
 
-	return projInfo;
+		ret.push_back(projInfo);
+	}	
+
+	return ret;
 }
 
 bool CheckConfig(const SProjectInfo& projInfo)
