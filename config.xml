@@ -9,17 +9,7 @@
 		<Item From="F:\FreeCAD_sf_master\src\App" To="$(ProjectBuildPath)App\" AddToIncludeDir="True" />
 	</SrcDirectories>
 	<!--IgnoreCustomBuild-->
-	<IgnoreCustomBuild All="True">
-		<Item Name="F:\FreeCAD_sf_master\src\App\DocumentObjectGroupPy.xml" />
-		<Item Name="F:\FreeCAD_sf_master\src\App\DocumentObjectPy.xml" />
-		<Item Name="F:\FreeCAD_sf_master\src\App\DocumentPy.xml" />
-		<Item Name="F:\FreeCAD_sf_master\src\App\PropertyContainerPy.xml" />
-		<Item Name="F:\FreeCAD_sf_master\src\App\ComplexGeoDataPy.xml" />
-		<Item Name="F:\FreeCAD_sf_master\src\App\MaterialPy.xml" />
-		<Item Name="F:\FreeCAD_sf_master\src\App\FreeCADInit.py" />
-		<Item Name="F:\FreeCAD_sf_master\src\App\FreeCADTest.py" />
-		<Item Name="F:\FreeCAD_sf_master\src\App\CMakeLists.txt" />
-	</IgnoreCustomBuild>
+	<IgnoreCustomBuild All="True" />
 	<IgnoreInclude>
 	</IgnoreInclude>
 	<IgnoreCompile>
@@ -40,6 +30,9 @@
 		<File From="F:\FreeCAD_sf_master\Build\src\App\MaterialPy.cpp" To="$(ProjectBuildPath)App\"/>
 		<File From="F:\FreeCAD_sf_master\Build\src\App\PropertyContainerPy.h" To="$(ProjectBuildPath)App\"/>
 		<File From="F:\FreeCAD_sf_master\Build\src\App\PropertyContainerPy.cpp" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\src\App\ExpressionParser.tab.h" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\src\App\ExpressionParser.tab.c" To="$(ProjectBuildPath)App\"/>
+		<File From="F:\FreeCAD_sf_master\src\App\lex.ExpressionParser.c" To="$(ProjectBuildPath)App\"/>
 		<File From="F:\FreeCAD_sf_master\Build\src\Build\Version.h" To="$(ProjectBuildPath)Build\"/>
 	</AdditionalCopyFiles>
 	<!--AdditionalIncludeDirectories-->
