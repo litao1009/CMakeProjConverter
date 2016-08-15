@@ -592,6 +592,7 @@ bool	BuildVCXPROJ(const SProjectInfo& projInfo)
 								}
 
 								auto cpyPath = curDir.To_ / curRelPath;
+								bfs::create_directories( cpyPath.parent_path() );
 								bfs::copy_file(filePath, cpyPath, bfs::copy_option::overwrite_if_exists);
 
 								auto relFromProj = RelativeTo(projInfo.VCXProjectPath.To_, cpyPath);
