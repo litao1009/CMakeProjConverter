@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project TargetName="SDL2-static">
+	<!--ProjectBuildPath-->
+	<ProjectBuildPath Path="D:\Code\SDL2\SDL2" />
+	<!--VCXProjectPath-->
+	<VCXProjectPath From="D:\Code\SDL2-2.0.4\Build\" To="$(ProjectBuildPath)" />
+	<!--SrcDirectories-->
+	<SrcDirectories>
+		<Item From="D:\Code\SDL2-2.0.4\src" To="$(ProjectBuildPath)src\" AddToIncludeDir="True" />
+	</SrcDirectories>
+	<!--IgnoreCustomBuild-->
+	<IgnoreCustomBuild All="True" />
+	<!--AdditionalIncludeDirectories-->
+	<AdditionalIncludeDirectories>
+		<Item Path="include" />
+	</AdditionalIncludeDirectories>
+	<AdditionalCopyFiles>
+		<Folder From="D:\Code\SDL2-2.0.4\include" To="$(ProjectBuildPath)include\"/>
+		<Folder From="D:\Code\SDL2-2.0.4\src" To="$(ProjectBuildPath)src\"/>
+	</AdditionalCopyFiles>
+</Project>

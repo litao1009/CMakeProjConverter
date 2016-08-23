@@ -195,7 +195,7 @@ ProjectList	ReadConfig()
 					SProjectInfo::SSrcDir newDir;
 					newDir.From_ = bfs::system_complete(*from);
 					newDir.To_ = bfs::system_complete(PathConverter::GetInstance().ConvertPath(*to, projInfo));
-					newDir.AddToIncludeDir_ = *addToIncDir == "True";
+					newDir.AddToIncludeDir_ = (addToIncDir && *addToIncDir == "True");
 
 					newDir.From_.remove_trailing_separator();
 					newDir.To_.remove_trailing_separator();

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project TargetName="assimp">
+	<!--ProjectBuildPath-->
+	<ProjectBuildPath Path="D:\Code\assimp\assimp\" />
+	<!--VCXProjectPath-->
+	<VCXProjectPath From="D:\Code\Repository\assimp\Build\code" To="$(ProjectBuildPath)" />
+	<!--SrcDirectories-->
+	<SrcDirectories>
+		<Item From="D:\Code\Repository\assimp\code\" To="$(ProjectBuildPath)src\" AddToIncludeDir="True" />
+		<Item From="D:\Code\Repository\assimp\include\" To="$(ProjectBuildPath)include\" AddToIncludeDir="True" />
+		<Item From="D:\Code\Repository\assimp\contrib\" To="$(ProjectBuildPath)\contrib" AddToIncludeDir="True" />
+	</SrcDirectories>
+	<!--IgnoreCustomBuild-->
+	<IgnoreCustomBuild All="True" />
+	<!--AdditionalIncludeDirectories-->
+	<AdditionalIncludeDirectories>
+		<Item Path="include" />
+	</AdditionalIncludeDirectories>
+	<AdditionalCopyFiles>
+		
+	</AdditionalCopyFiles>
+</Project>
