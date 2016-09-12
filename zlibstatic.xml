@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project TargetName="libprotobuf">
+<Project TargetName="zlibstatic">
 	<!--ProjectBuildPath-->
-	<ProjectBuildPath Path="D:\Code\protobuf\protobuf" />
+	<ProjectBuildPath Path="D:\Code\assimp\zlib\" />
 	<!--VCXProjectPath-->
-	<VCXProjectPath From="D:\Code\Repository\protobuf\cmake\Build12" To="$(ProjectBuildPath)" />
+	<VCXProjectPath From="D:\Code\Repository\assimp\Build\contrib\zlib" To="$(ProjectBuildPath)" />
 	<!--SrcDirectories-->
 	<SrcDirectories>
-		<Item From="D:\Code\Repository\protobuf\src\google" To="$(ProjectBuildPath)\src" AddToIncludeDir="True" />
+		<Item From="D:\Code\Repository\assimp\contrib\" To="$(ProjectBuildPath)\zlib" AddToIncludeDir="True" />
+		<Item From="D:\Code\Repository\assimp\Build\contrib\zlib\" To="$(ProjectBuildPath)\zlib" />
 	</SrcDirectories>
 	<!--IgnoreCustomBuild-->
 	<IgnoreCustomBuild All="True" />
